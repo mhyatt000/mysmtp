@@ -24,4 +24,7 @@ mysmtp = { path = ".", editable = true }
 
 [tool.pixi.tasks]
 install = { cmd = "mkdir -p $HOME/.config/systemd/user && cp mysmtp.service $HOME/.config/systemd/user/mysmtp.service" }
-enable = { cmd = "systemctl --user enable --now mysmtp.service" }
+enable = { cmd = "systemctl --user enable --now mysmtp.service" , depends-on = ["install"]}
+status = { cmd = "systemctl --user status mysmtp" }
+log = { cmd = "journalctl --user -u mysmtp -f" }
+stop = { cmd = "systemctl --user stop mysmtp" }

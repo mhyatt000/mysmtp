@@ -343,7 +343,7 @@ packages:
 - pypi: ./
   name: mysmtp
   version: 0.1.0
-  sha256: 2849d3fb2f47ea8dd13be7ed54726f6140f394f447372c58a6c0054109c61cd5
+  sha256: 732beff6c9c5a0f134f16e0d279c471d84db52de6ab96fed4bb262b84f1f8125
   requires_dist:
   - rich>=14.2.0
   requires_python: '>=3.13'

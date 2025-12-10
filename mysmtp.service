@@ -9,13 +9,11 @@ Wants=network-online.target
 # | Per-user service                   | `~/.config/systemd/user/` | Yes (with `enable-linger`) | No          |
 # | Arbitrary directory like `~/local` | **No** — won’t be read    | n/a                        | n/a         |
 
-
 [Service]
-ExecStart=/usr/bin/python3 /home/matt/email_reporter.py
-WorkingDirectory=/home/matt
+ExecStart=%h/.local/bin/uv run main.py
+WorkingDirectory=%h/repo/mysmtp
 Restart=always
 RestartSec=5
-User=matt
 
 [Install]
 WantedBy=multi-user.target
