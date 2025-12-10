@@ -1,7 +1,9 @@
 import smtplib
 from email.mime.text import MIMEText
 import os
-# from dotenv import load_dotenv
+
+from dotenv import load_dotenv
+load_dotenv()
 
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
