@@ -1,5 +1,11 @@
 import re
 
+import os
+
+def has_nvidia_gpu_dev():
+    return any(os.path.exists(f"/dev/nvidia{i}") for i in range(16))
+
+
 def parse_nvidia_smi(text: str):
     result = {
         "driver_version": None,
