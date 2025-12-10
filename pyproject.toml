@@ -14,10 +14,14 @@ dependencies = [
 
 [tool.pixi.workspace]
 channels = ["conda-forge"]
-platforms = ["osx-64"]
+platforms = [
+"osx-64",
+"linux-64",
+]
 
 [tool.pixi.pypi-dependencies]
 mysmtp = { path = ".", editable = true }
 
 [tool.pixi.tasks]
-install-service = "mkdir -p \"$HOME/.config/systemd/user\" && cp mysmtp.service \"$HOME/.config/systemd/user/mysmtp.service\""
+install = { cmd = "mkdir -p $HOME/.config/systemd/user && cp mysmtp.service $HOME/.config/systemd/user/mysmtp.service" }
+enable = { cmd = "systemctl --user enable --now mysmtp.service" }
