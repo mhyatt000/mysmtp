@@ -20,3 +20,4 @@ platforms = ["osx-64"]
 mysmtp = { path = ".", editable = true }
 
 [tool.pixi.tasks]
+enable-service = { cmd = ["systemctl", "--user", "enable", "--now", "mysmtp.service"] }
