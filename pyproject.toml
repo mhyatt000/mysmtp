@@ -20,3 +20,4 @@ platforms = ["osx-64"]
 mysmtp = { path = ".", editable = true }
 
 [tool.pixi.tasks]
+install-service = "mkdir -p \"$HOME/.config/systemd/user\" && cp mysmtp.service \"$HOME/.config/systemd/user/mysmtp.service\""
