@@ -1,9 +1,10 @@
 from dotenv import load_dotenv
 from mysmtp.email import Mailer
 from mysmtp.subproc import do, parse, lines
+from mysmtp.tasks import log_gpu_metrics
 
 from rocketry import Rocketry
-from rocketry.conds import daily
+from rocketry.conds import daily, every
 
 load_dotenv()
 app = Rocketry()
@@ -16,6 +17,11 @@ def do_daily():
 
 # @app.task(cron("* 2 * * *"))
 # def do_based_on_cron():
+
+
+@app.task(every("1 second"))
+def gather_gpu_metrics():
+    log_gpu_metrics()
 
 def main():
     do_daily()
