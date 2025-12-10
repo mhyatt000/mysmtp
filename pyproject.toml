@@ -11,3 +11,12 @@ requires-python = ">=3.13"
 dependencies = [
     "rich>=14.2.0",
 ]
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["osx-64"]
+
+[tool.pixi.pypi-dependencies]
+mysmtp = { path = ".", editable = true }
+
+[tool.pixi.tasks]

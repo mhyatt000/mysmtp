@@ -1,0 +1,22 @@
+[Unit]
+Description=Email Reporter (Rocketry)
+After=network-online.target
+Wants=network-online.target
+# ~/.config/systemd/user/*.service
+# | Goal                               | Put file where?           | Starts on reboot?          | Needs sudo? |
+# | ---------------------------------- | ------------------------- | -------------------------- | ----------- |
+# | System-wide service                | `/etc/systemd/system/`    | Yes                        | Yes         |
+# | Per-user service                   | `~/.config/systemd/user/` | Yes (with `enable-linger`) | No          |
+# | Arbitrary directory like `~/local` | **No** — won’t be read    | n/a                        | n/a         |
+
+
+[Service]
+ExecStart=/usr/bin/python3 /home/matt/email_reporter.py
+WorkingDirectory=/home/matt
+Restart=always
+RestartSec=5
+User=matt
+
+[Install]
+WantedBy=multi-user.target
+
