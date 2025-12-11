@@ -1,10 +1,9 @@
 from dotenv import load_dotenv
+from pathlib import Path
+from mysmtp.task.plot import plot_gpu_day
 from mysmtp.email import Mailer
 from mysmtp.subproc import do, parse, lines
 from mysmtp.tasks import log_gpu_metrics
-from pathlib import Path
-from mysmtp.task.plot import plot_gpu_day
-
 
 from rocketry import Rocketry
 from rocketry.conds import daily, every
@@ -55,9 +54,13 @@ def do_send_plot():
         .send()
     )
     
+
+
+
 def main():
+    do_send_plot()
     print("Starting Rocketry app...")
-    app.run()
+    # app.run()
 
 if __name__ == '__main__':
     main()
