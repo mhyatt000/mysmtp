@@ -18,13 +18,12 @@ def do_daily():
 # @app.task(cron("* 2 * * *"))
 # def do_based_on_cron():
 
-
 @app.task(every("1 second"))
-def gather_gpu_metrics():
+def do_log_gpu():
     log_gpu_metrics()
 
 def main():
-    do_daily()
+    print("Starting Rocketry app...")
     app.run()
 
 if __name__ == '__main__':

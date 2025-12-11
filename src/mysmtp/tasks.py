@@ -1,4 +1,5 @@
 from pathlib import Path
+from rich import print
 import subprocess
 
 import pandas as pd
@@ -24,6 +25,26 @@ def log_gpu_metrics() -> None:
 
     parsed = parse_nvidia_smi(result.stdout)
     timestamp = pd.Timestamp.utcnow()
+
+    cmd = "nvidia-smi --query-gpu=index,name,temperature.gpu,power.draw,power.limit,memory.used,memory.total,utilization.gpu --format=csv,noheader,nounits"
+    result = subprocess.run(cmd.split(), capture_output=True, text=True, check=True)
+    gpu_info_lines = result.stdout.strip().splitlines()
+    gpu_info_map = {
+            'index': (0, int),
+            'name': (1, str),
+            'temperature_C': (2, int),
+            'power_usage_W': (3, float),
+            'power_cap_W': (4, float),
+            'memory_used_MiB': (5, int),
+            'memory_total_MiB': (6, int),
+            'util_percent': (7, int),
+    }
+    gpu_info_list = []
+    for line in gpu_info_lines:
+        parts = [part.strip() for part in line.split(',')]
+        gpu_info = {key: dtype(parts[idx]) for key, (idx, dtype) in gpu_info_map.items()}
+        gpu_info_list.append(gpu_info)
+    parsed['gpus'] = gpu_info_list
 
     gpu_rows = []
     for gpu in parsed.get("gpus", []):
