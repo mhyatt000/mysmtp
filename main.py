@@ -14,6 +14,11 @@ def do_daily():
     M = Mailer()
     M.send(subject="Test Email", message="Hello, this is a test email from Python.")
 
+
+# @app.task(every("1 second"))
+# def do_every_second():
+    # pass
+
 # @app.task(cron("* 2 * * *"))
 # def do_based_on_cron():
 
